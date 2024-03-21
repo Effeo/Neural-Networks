@@ -17,7 +17,7 @@ class ConvDense(Layer):
     def forward(self, input):
         self.input = input
     
-        output = np.dot(self.input, self.k) + self.biases
+        output = np.dot(self.input, self.k) + self.biases * 0
         return output
 
     '''

@@ -70,8 +70,8 @@ network_8K = [
 ]
 (x_train, y_train), (x_test, y_test) = mnist.load_data()
 
-x_train, y_train = preprocess_data(x_train, y_train, 10000)
-x_test, y_test = preprocess_data(x_test, y_test, 2500)
+x_train, y_train = preprocess_data(x_train, y_train, 100)
+x_test, y_test = preprocess_data(x_test, y_test, 100)
 
 '''
 errors_1k, accuracies_1K = train(
@@ -94,7 +94,7 @@ print(test_accuracy_network_1K)
 errors_8k, accuracies_8K = train(
     x_train=x_train,
     y_train=y_train,
-    epochs=8,
+    epochs=40,
     learning_rate=0.01,
     loss_prime=derivatie_cross_entropy,
     loss_function=cross_entropy_loss,

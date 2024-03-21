@@ -104,8 +104,7 @@ def reshape_columns_to_square_matrices(A):
     for column in range(A.shape[1]):
         # Extract the current column and reshape it into a square matrix
         square_matrix = A[:, column].reshape(side_length, side_length)
-        square_matrix_rotated = np.rot90(square_matrix, 2)
-        square_matrices.append(square_matrix_rotated)
+        square_matrices.append(square_matrix)
 
     return square_matrices
 

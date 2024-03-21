@@ -5,6 +5,7 @@ class Dense(Layer):
     def __init__(self, input_size, output_size):
         self.weights = np.random.randn(output_size, input_size)
         self.bias = np.random.randn(output_size, 1)
+        
         self.prev_grad_weights = np.zeros_like(self.weights)
         self.prev_grad_biases = np.zeros_like(self.bias)
         self.step_sizes_weights = 0.1 * np.ones_like(self.weights)
@@ -13,7 +14,7 @@ class Dense(Layer):
 
     def forward(self, input):
         self.input = input
-        return np.dot(self.weights, self.input) + self.bias
+        return np.dot(self.weights, self.input) + self.bias * 0
 
     def backward(self, output_gradient, learning_rate: float, use_rprop: bool):
         weights_gradient = np.dot(output_gradient, self.input.T)
