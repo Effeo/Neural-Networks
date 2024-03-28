@@ -144,7 +144,6 @@ def forward_prop(
 
     # Set the input layer
     a[0] = x
-
     # Iterate through each layer except the last one
     for i in range(num_layers - 1):
         z[i] = np.dot(weights[i], a[i]) + biases[i]
@@ -338,7 +337,7 @@ def gradint_descent(
 
     return weights, biases
 
-data = pd.read_csv(r'.\\test_data\\train.csv')
+data = pd.read_csv(r'.\\train.csv')
 data = np.array(data)
 m, n = data.shape
 np.random.shuffle(data)

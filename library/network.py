@@ -19,23 +19,39 @@ def train(network: list[Layer], loss_function, loss_prime, x_train: np.ndarray, 
     # for layer in network:
     #     if isinstance(layer, Softmax):
     #         layer._use_cross_entropy = loss_prime == derivatie_cross_entropy
-    
+    x = x_train
+    y = y_train
+
     for e in range(epochs):
         error = 0
         outputs = []
-        for x, y in zip(x_train, y_train):
-            # forward
-            output = predict(network, x)
+
+        output = predict(network, x)
+
+        error += loss_function(y, output)
+        grad = loss_prime(y, output)
+
+        for layer in reversed(network):
+            if isinstance(layer, Softmax):
+                grad = output - y
+            grad = layer.backward(grad, learning_rate, use_r_prop)
+
+        # for x, y in zip(x_train, y_train):
+            # print(f"x: {x}")
+
+            # return
+            # # forward
+            # output = predict(network, x)
             
-            outputs.append(output)
-            error += loss_function(y, output)
+            # outputs.append(output)
+            # error += loss_function(y, output)
             
-            # backward
-            grad = loss_prime(y, output)
-            for layer in reversed(network):
-                if isinstance(layer, Softmax):
-                    grad = output - y
-                grad = layer.backward(grad, learning_rate, use_r_prop)
+            # # backward
+            # grad = loss_prime(y, output)
+            # for layer in reversed(network):
+                # if isinstance(layer, Softmax):
+                    # grad = output - y
+                # grad = layer.backward(grad, learning_rate, use_r_prop)
         outputs = np.array(outputs)
         
         error /= len(x_train)
